@@ -1,0 +1,60 @@
+p {
+  font-family: Lato;
+}
+
+.content-page {
+  margin:25px;  
+}
+
+#root {
+  padding: 30px;
+}
+
+.register-form {
+  text-align: center;
+  padding: 40px;
+  max-width: 420px;
+  margin: auto;
+  -webkit-box-shadow: 1px 5px 11px 1px rgba(0, 0, 0, 0.46);
+  box-shadow: 1px 5px 11px 1px rgba(0, 0, 0, 0.46);
+}
+
+.preview-form {
+  max-width: 600px;
+  padding: 30px;
+  padding-left: 35px;
+  padding-right: 35px;
+  margin: auto;
+  -webkit-box-shadow: 1px 5px 11px 1px rgba(0, 0, 0, 0.46);
+  box-shadow: 1px 5px 11px 1px rgba(0, 0, 0, 0.46);
+}
+
+.submit-form {
+  -webkit-box-shadow: 1px 5px 11px 7px rgba(0, 0, 0, 0.46);
+  box-shadow: 1px 5px 11px 7px rgba(0, 0, 0, 0.46);
+}
+
+input[type=checkbox] {
+  margin-top: 6px;
+}
+
+.invalid-option {
+  border: 1px solid red;
+  -webkit-box-shadow: 0px 0px 4px 0px rgb(194 29 77);
+  box-shadow: 0px 0px 4px 0px rgb(194 29 77);
+}
+
+.invalid-text {
+  margin-top: 5px;
+  font-size: 10pt;
+  color: rgb(194 29 77);
+}
+
+.question-label{
+ font-weight: 500;
+}
+.question-title {
+  text-align: center;
+  font-weight: 550;
+  font-size: 17pt;
+}

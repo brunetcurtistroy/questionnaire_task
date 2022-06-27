@@ -1,0 +1,94 @@
+<div class="content-page">
+  <div *ngIf="!isPreview" class="register-form">
+    <div>
+      <h5 class="mb-4">
+        (Question {{(currentIndex + 1) + " / " +questionniareList.length}} )
+      </h5>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="showNextItem()">
+      <div *ngIf="!isPreview" [ngSwitch]="currentItem.type">
+        <!-- text -->
+        <div *ngSwitchCase="'string'" class="form-group">
+          <label>{{currentItem.text}}</label>
+          <input type="text" [formControlName]="currentFieldName" class="form-control"
+            [ngClass]="{ 'is-invalid':submitted &&  f[currentFieldName].errors }" />
+          <div *ngIf="submitted&&f[currentFieldName].errors" class="invalid-feedback">
+            <div *ngIf="f[currentFieldName].errors['required']">You must input some text</div>
+          </div>
+        </div>
+
+        <!-- option -->
+        <div *ngSwitchCase="'choice'" class="form-group">
+          <label>{{currentItem.text}}</label>
+
+          <select [formControlName]="currentFieldName" class="form-control"
+            [ngClass]="{ 'invalid-option': submitted && f[currentFieldName].errors }">
+            <option [ngValue]="null" disabled>Select One</option>
+            <option *ngFor="let opt of currentItem.option;let index = index" [ngValue]="index">
+              {{opt.valueCoding.display}}
+            </option>
+          </select>
+
+          <div *ngIf="submitted && f[currentFieldName].errors" class="invalid-text">
+            <div *ngIf="f[currentFieldName].errors['required']">You must selecte one list</div>
+          </div>
+        </div>
+
+
+        <!-- date -->
+
+        <div *ngSwitchCase="'date'" class="form-group">
+          <label>{{currentItem.text}}</label>
+
+          <input type="date" [formControlName]="currentFieldName" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f[currentFieldName].errors }" />
+
+          <div *ngIf="submitted && f[currentFieldName].errors" class="invalid-feedback">
+            <div *ngIf="f[currentFieldName].errors['required']">Date is required</div>
+          </div>
+        </div>
+
+        <div *ngSwitchCase="'boolean'" class="form-group form-check">
+          <input type="checkbox" [formControlName]="currentFieldName" class="form-check-input" />
+          <label for="acceptTerms" class="form-check-label">{{currentItem.text}}</label>
+        </div>
+
+
+        <div *ngSwitchDefault>can not show this default fomarted data...</div>
+
+      </div>
+
+
+
+      <div class="form-group  pt-3">
+        <button class="btn btn-primary float-right ">Next</button>
+      </div>
+
+
+    </form>
+  </div>
+
+  <div *ngIf="isPreview" class="preview-form">
+    <h5 class="mb-4 question-title">
+      Preview before submit
+    </h5>
+
+    <form [formGroup]="form">
+
+      <div *ngFor="let item of questionniareList;let index = index" class="form-group">
+        <div class="question-label">{{item.text}}</div>
+        <div>
+          <div *ngIf="item.type != 'choice' " class="question-content">{{updatedAnswers[index]}}</div>
+          <div *ngIf="item.type == 'choice'" class="question-content">
+            {{questionniareList[index].option[updatedAnswers[index]].valueCoding.display}}
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="form-group text-center pt-3">
+
+      <button (click)="submitFunc()" class="btn btn-success text-center ">Submit</button>
+    </div>
+
+  </div>
+</div>
